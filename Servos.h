@@ -21,21 +21,20 @@
 
 #include <Arduino.h>
 #include <Servo.h>
-#include "BufferListener.h"
+#include "IntegerListener.h"
 
-class ServoOutput : BufferListener {
+class ServoOutput : IntegerListener {
 private:
-    uint8_t _address;
     Servo _servo;
     unsigned int _minPulseWidth;
     unsigned int _maxPulseWidth;
     unsigned int _lastValue;
 
-    void onBufferReady(uint8_t *buffer);
-
 public:
-    ServoOutput(uint8_t address, unsigned int minPulseWidth = 540, unsigned int maxPulseWidth = 2400);
-    void begin(uint8_t pin);
+    ServoOutput(unsigned int address, unsigned int mask, uint8_t shift, unsigned int minPulseWidth = 540, unsigned int maxPulseWidth = 2400);
+    void attach(uint8_t pin);
+
+    virtual void onDcsBiosFrameSync();    
 };
 
 #endif

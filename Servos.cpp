@@ -18,23 +18,21 @@
 */
 #include "Servos.h"
 
-ServoOutput::ServoOutput(uint8_t address, unsigned int minPulseWidth, unsigned int maxPulseWidth) {
-    _address = address;
+ServoOutput::ServoOutput(unsigned int address, unsigned int mask, uint8_t shift, unsigned int minPulseWidth, unsigned int maxPulseWidth) : IntegerListener(address, mask, shift) {
     _minPulseWidth = minPulseWidth;
     _maxPulseWidth = maxPulseWidth;
 }
 
-void ServoOutput::begin(uint8_t pin) {
+void ServoOutput::attach(uint8_t pin) {
     _servo.attach(pin, _minPulseWidth, _maxPulseWidth);
     _servo.writeMicroseconds(_minPulseWidth);
     _lastValue = _minPulseWidth;
 }
 
-void ServoOutput::onBufferReady(uint8_t *buffer) {
-    unsigned int data = (buffer[_address] << 8) | buffer[_address+1];
+void ServoOutput::onDcsBiosFrameSync() {
     unsigned int value = map(data, 0, 65535, _minPulseWidth, _maxPulseWidth);
     if (_lastValue != value) {
         _servo.writeMicroseconds(value);
-        _lastValue = data;
+        _lastValue = value;
     }
 }
