@@ -30,7 +30,7 @@ void ServoOutput::attach(uint8_t pin) {
 }
 
 void ServoOutput::onDcsBiosFrameSync() {
-    unsigned int value = map(getData, 0, 65535, _minPulseWidth, _maxPulseWidth);
+    unsigned int value = map(getData(), 0, 65535, _minPulseWidth, _maxPulseWidth);
     if (_lastValue != value) {
         _servo.writeMicroseconds(value);
         _lastValue = value;
