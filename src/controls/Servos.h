@@ -21,7 +21,7 @@
 
 #include <Arduino.h>
 #include <Servo.h>
-#include "IntegerListener.h"
+#include "dcs/IntegerListener.h"
 
 class ServoOutput : IntegerListener {
 private:
