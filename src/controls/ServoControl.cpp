@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with DcsBios-Firmware.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include "Servos.h"
+#include "ServoControl.h"
 
 ServoOutput::ServoOutput(unsigned int address, unsigned int mask, uint8_t shift, unsigned int minPulseWidth, unsigned int maxPulseWidth) : IntegerListener(address, mask, shift) {
     _minPulseWidth = minPulseWidth;

@@ -19,6 +19,6 @@
 #ifndef _DCSBIOSSERVO_H_
 #define _DCSBIOSSERVO_H_
 
-#include "controls/Servos.h"
+#include "controls/ServoControl.h"
 
 #endif
