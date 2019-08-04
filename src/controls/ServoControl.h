@@ -26,15 +26,16 @@
 class ServoOutput : IntegerListener {
 private:
     Servo _servo;
-    unsigned int _minPulseWidth;
-    unsigned int _maxPulseWidth;
+    const int _minPulseWidth;
+    const int _maxPulseWidth;
+
     unsigned int _lastValue;
 
 public:
-    ServoOutput(unsigned int address, unsigned int mask, uint8_t shift, unsigned int minPulseWidth = 540, unsigned int maxPulseWidth = 2400);
+    ServoOutput(unsigned int address, unsigned int mask, uint8_t shift, int minPulseWidth = 540, int maxPulseWidth = 2400);
     void attach(uint8_t pin);
 
-    virtual void onDcsBiosFrameSync();    
+    void onDcsBiosFrameSync() override;
 };
 
 #endif
